@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Interactive Prototype - Rocketlane</title>
+<link href="styles.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="app-layout">
+<aside class="sidebar">
+<div class="sidebar-header">
+<h1>Rocketlane Project Governance Agent Design process documentation</h1>
+</div>
+<ul class="tree-menu">
+<li><a href="index.html">Design Process</a></li>
+<li><a href="challenges.html">Key design challenges and reasonings</a></li>
+<li><a href="handoff.html">Developer hand off</a></li>
+<li><a class="active" href="prototype.html">Interactive prototype</a></li>
+</ul>
+</aside>
+<main class="content-area">
+<div class="page-content">
+<header class="page-header">
+<h1 class="page-title">Interactive prototype</h1>
+<p class="page-description">Experience the Rocketlane Project Governance Agent through our interactive prototype.</p>
+</header>
+<section class="content-section">
+<div class="injected-content" style="text-align: center; margin-top: 2rem;">
+<h2>Explore the Prototype</h2>
+<p style="margin-bottom: 2rem;">Click the button below to launch the interactive prototype and see the Governance Agent in action.</p>
+<a href="https://roketlane-assignment-submission.vercel.app/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #3b82f6; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 1rem; transition: background-color 0.2s;">Launch Interactive Prototype</a>
+</div>
+
+<div class="testing-guide" style="margin-top: 4rem; text-align: left;">
+<h2>Testing guide</h2>
+
+<div class="scenario-card" style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1.5rem; margin-top: 1.5rem; line-height: 1.6;">
+<h3 style="margin-top: 0; color: #1e293b; font-size: 1.25rem;">📌 Scenario 1: Shared System Initiation & Governance Interception</h3>
+<p style="color: #475569; margin-bottom: 1.5rem;"><strong>User Input:</strong> Writes prompt: <em>"Mark all the projects completed"</em>.</p>
+<p style="color: #475569; margin-bottom: 1.5rem;"><strong>Agent Logic:</strong> Runs a 4-second workspace database audit instead of blindly marking projects completed.</p>
+<p style="color: #475569; margin-bottom: 1.5rem;"><strong>System Output:</strong> Generates Project Closeout Audit card:<br>
+<span style="color: #64748b; font-size: 0.95em; display: inline-block; margin-top: 0.25rem;"><strong>Status:</strong> PRJ-005 • Bowen-Chapman - Enterprise Rollout flagged as Blocked.<br>
+<strong>Blocker Reason:</strong> 1 open milestone task preventing closeout.<br>
+<strong>Action Paths:</strong> Presents dual options (Auto-resolve blockers & complete vs. Inspect PRJ-005 details).</span></p>
+
+<h4 style="margin-top: 1.5rem; color: #334155; font-size: 1.1rem; border-bottom: 1px solid #e2e8f0; padding-bottom: 0.5rem;">Branch A: Manual Inspection & Nested Triage Flow</h4>
+<ul style="list-style-type: none; padding-left: 0; color: #334155; margin: 0; margin-top: 1rem;">
+<li style="margin-bottom: 1rem;">
+<strong>Step 1 — Deep Inspection:</strong><br>
+<span style="display: inline-block; margin-top: 0.25rem;"><strong>Action:</strong> User clicks <strong>Inspect PRJ-005 details</strong>.<br>
+<strong>Agent Logic:</strong> Executes a 10-second dependency lookup down to root cause level.</span>
+</li>
+<li style="margin-bottom: 1rem;">
+<strong>Step 2 — 4-Level Conflict Matrix Rendering:</strong><br>
+<span style="display: inline-block; margin-top: 0.25rem;"><strong>Agent Output:</strong> Renders the Conflict Matrix (Triage Flow) table:<br>
+<span style="color: #64748b; font-size: 0.95em; display: inline-block; margin-top: 0.25rem; background-color: #f1f5f9; padding: 0.5rem; border-radius: 4px; border: 1px solid #e2e8f0;">
+L1 Project: PRJ-005 (Blocked)<br>
+L2 Milestone: MST-001 (Blocked)<br>
+L3 Subtask: TSK-0003 (Blocked)<br>
+L4 Root Cause: TSK-0004 • Starter Kit Walkthrough (Violation: 0.00h logged) with explicit input/resolve action controls (02:30 | Resolved).
+</span></span>
+</li>
+<li style="margin-bottom: 1rem;">
+<strong>Step 3 — Explicit Manual Action:</strong><br>
+<span style="display: inline-block; margin-top: 0.25rem;"><strong>Action:</strong> User triggers command: <em>"Resolve TSK-0004 + Starter Kit Walkthrough by logging the time as 02:30"</em>.</span>
+</li>
+<li style="margin-bottom: 1rem;">
+<strong>Step 4 — Final Closeout State:</strong><br>
+<span style="display: inline-block; margin-top: 0.25rem;"><strong>Agent Logic:</strong> Updates time log for TSK-0004 (8 seconds), clears dependency blockers across all 4 levels, and marks all active projects as completed.<br>
+<strong>Agent Output:</strong> Displays all-green Conflict Matrix (Triage flow) state (Resolved: Time logged) followed by an inline micro-survey (Was this resolution accurate?).</span>
+</li>
+</ul>
+
+<h4 style="margin-top: 1.5rem; color: #334155; font-size: 1.1rem; border-bottom: 1px solid #e2e8f0; padding-bottom: 0.5rem;">Branch B: One-Click Autonomous Auto-Resolve Flow</h4>
+<ul style="list-style-type: none; padding-left: 0; color: #334155; margin: 0; margin-top: 1rem;">
+<li style="margin-bottom: 1rem;">
+<strong>Step 1 — Direct Auto-Resolve Trigger:</strong><br>
+<span style="display: inline-block; margin-top: 0.25rem;"><strong>Action:</strong> User clicks <strong>Auto-resolve blockers & complete</strong> directly on the audit card.</span>
+</li>
+<li style="margin-bottom: 1rem;">
+<strong>Step 2 — Autonomous Time Calculation:</strong><br>
+<span style="display: inline-block; margin-top: 0.25rem;"><strong>Agent Logic:</strong> Processes for 10 seconds, calculates expected missing time based on historical logging averages (deriving 02:30 hours), logs time on behalf of the user, and closes all projects.</span>
+</li>
+<li style="margin-bottom: 0;">
+<strong>Step 3 — Instant Resolution & Feedback:</strong><br>
+<span style="display: inline-block; margin-top: 0.25rem;"><strong>Agent Output:</strong> Renders the identical all-green Conflict Matrix (Triage flow) showing all 4 dependency levels resolved, accompanied by the completion message and feedback micro-survey.</span>
+</li>
+</ul>
+</div>
+
+<div class="scenario-card" style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1.5rem; margin-top: 1.5rem; line-height: 1.6;">
+<h3 style="margin-top: 0; color: #1e293b; font-size: 1.25rem;">📌 Scenario 2: Rebalancing Workload ("Wrap Lisa's work within this week")</h3>
+<p style="color: #475569; margin-bottom: 1.5rem;">This flow demonstrates how the agent handles team workload audits and offers both an automated fast-path and full manual control.</p>
+
+<ul style="list-style-type: none; padding-left: 0; color: #334155; margin: 0;">
+<li style="margin-bottom: 1rem;">
+<strong>Step 1:</strong> Enter or click the sample prompt: <em>"Wrap Lisa's work within this week"</em>.
+</li>
+<li style="margin-bottom: 1rem;">
+<strong>Step 2:</strong> Review the <strong>Lisa's Workload Audit</strong> card that appears after the 4-second audit.
+</li>
+<li style="margin-bottom: 1rem;">
+<strong>Step 3:</strong> Test one of two available decision branches:
+<ul style="list-style-type: disc; padding-left: 1.5rem; margin-top: 0.75rem; margin-bottom: 0;">
+<li style="margin-bottom: 0.75rem;">
+<strong>Option A (1-Click Autonomous Path):</strong> Click <strong>Auto-assign to team</strong>.<br>
+<span style="color: #64748b; font-size: 0.95em; display: inline-block; margin-top: 0.25rem;"><em>What to watch for:</em> The agent automatically calculates sprint capacity, logs pending hours, reassigns tasks to low-bandwidth team members, and renders a clean Task Reassignment Matrix.</span>
+</li>
+<li style="margin-bottom: 0.75rem;">
+<strong>Option B (Granular Inspection Path):</strong> Click <strong>Inspect & adjust Lisa's tasks</strong>.<br>
+<span style="color: #64748b; font-size: 0.95em; display: inline-block; margin-top: 0.25rem;"><em>What to watch for:</em> The agent renders interactive forms with hour inputs and team capacity dropdowns. Type: <code style="background-color: #e2e8f0; padding: 2px 4px; border-radius: 4px; font-size: 0.9em;">log 2.5h to TSK-0217, assign TSK-0218 to Cameron Fisher other TSK-0219 to April Frost</code> to see explicit manual overrides resolve into the matrix.</span>
+</li>
+</ul>
+</li>
+<li style="margin-bottom: 0;">
+<strong>Step 4 (Fallback Handling):</strong> Type <em>"Notify Lisa via Slack"</em> to see how the system gracefully handles missing third-party integrations with explicit non-blocking warning states.
+</li>
+</ul>
+</div>
+</div>
+</section>
+<nav class="pagination"><a class="page-btn prev" href="handoff.html"><span class="btn-label">Previous Page</span><span class="btn-title">Developer hand off</span></a><div></div></nav>
+</div>
+</main>
+</div>
+<script src="script.js"></script>
+<div class="lightbox-modal" id="lightbox-modal"><span class="lightbox-close">×</span><img class="lightbox-content" id="lightbox-img"/></div>
+</body>
+</html>
