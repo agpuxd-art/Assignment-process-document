@@ -1,0 +1,796 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Rocketlane - Project Governance agent Assignment</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+	print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+	print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+/* For default-background callouts, render the border outline. */
+.callout.block-color-default_background {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+/*
+ * Toggles and callouts hold arbitrary content, so they can easily be taller
+ * than a page. They must stay breakable: avoiding breaks inside them makes
+ * Chromium push the whole block onto the next page, which leaves the previous
+ * page mostly empty before every long toggle.
+ */
+details,
+aside {
+	margin: 1.25em 0;
+}
+
+/* Keep a toggle's title on the same page as the start of its content. */
+summary {
+	page-break-after: avoid;
+	break-after: avoid;
+}
+
+/*
+ * Toggle headings render as <h1/h2/h3 style="display:inline-block"> inside
+ * <summary>. Without this reset, the heading's margin-top pushes it below the
+ * ::marker (▼), so the triangle and the title appear on separate lines.
+ */
+summary h1,
+summary h2,
+summary h3,
+summary h4 {
+	margin-top: 0;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding-inline: 0.125rem;
+	padding-block: 0.375rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+/*
+ * Render emoji icons using a ::before pseudo-element to keep the glyph
+ * out of the DOM textContent traversal. This avoids double-rendering icons
+ * in callouts and page titles.
+ * NOTE(slim/html-export-pseudo-icons): I can't tagref this because it will
+ * flag as a duplicate tag after codegen.
+ */
+.icon[data-emoji]::before {
+	content: attr(data-emoji);
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	margin-right: 0.4em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.tab {
+	margin: 1.25em 0;
+	padding-inline: 1rem;
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css');</style></head><body><article id="3ada5000-d76c-8080-9158-c0216c9a533f" class="page sans"><header><h1 class="page-title" dir="auto">Rocketlane - Project Governance agent Assignment</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><hr id="3ada5000-d76c-8004-9185-e94c7ae859d3" dir="auto"/><h1 id="3ada5000-d76c-8012-a117-d2edfcfb11e2" class="block-color-blue" data-notion-highlight="blue" dir="auto">1. Understand the Problem</h1><p id="3b0a5000-d76c-80ae-a711-f8aef3b7f618" class="" dir="auto"><strong>As the brief offers sufficient context, I’ll synthesize the key details to ensure alignment.</strong></p><h3 id="3b0a5000-d76c-8064-b4ab-d209a358cdc7" class="" dir="auto"><strong>What is the problem?</strong></h3><p id="3b0a5000-d76c-8022-887a-dc1959f2811c" class="" dir="auto">In Rocketlane, wrapping up a customer onboarding project or balancing team workloads before the weekend often forces , Delivery Leads, and Project Managers to move across several boards, milestone phases, and time‑tracking views. They must check private versus shared client tasks, confirm document submissions, audit missing time logs against budgets, and clear blocked predecessor tasks.</p><p id="3b0a5000-d76c-8047-835e-e3f18d74b90f" class="" dir="auto">This scattered, manual process slows operations and drains focus, leaving onboarding leads tied up in hours of administrative work instead of driving client value.</p><h3 id="3ada5000-d76c-8042-ba58-fac2908ce843" class="" dir="auto"><strong>Who is affected? (The persona)</strong></h3><p id="3b0a5000-d76c-80b6-8780-cc8f2fb087b2" class="" dir="auto"><strong>Primary Persona</strong></p><p id="3b0a5000-d76c-8083-b357-d45a14a64918" class="" dir="auto">Product Managers /Delivery lead (Delivery/ Program operations team) </p><p id="3b0a5000-d76c-8082-a0bc-e25a4ce341a0" class="" dir="auto"><strong>Mindset</strong></p><p id="3b0a5000-d76c-8083-b65c-da471197ebb1" class="" dir="auto">Execution‑focused and milestone‑driven: <em>“I care about Time‑to‑Value for my clients, not clicking through endless task cards.”</em></p><h3 id="3b0a5000-d76c-803a-9be7-de77b6da8f40" class="" dir="auto">How are users solving this today in Rocketlane?</h3><p id="3b0a5000-d76c-802a-8146-d90aceb8e3fa" class="" dir="auto">Users rely on manual routines across different Rocketlane views and external tools:</p><ol type="1" id="3b0a5000-d76c-8007-b3ed-d7f5078981e5" class="numbered-list" start="1" dir="auto"><li><strong>Manual Board Audits:</strong> Switch between Kanban, List, and Gantt/Timeline views to spot red-flagged or blocked client tasks.</li></ol><ol type="1" id="3b0a5000-d76c-8048-b439-e48268db4930" class="numbered-list" start="2" dir="auto"><li><strong>Context Switching:</strong> Jump into the Rocketlane <strong>Time Tracking</strong> module to check unsubmitted timesheets, then switch to Slack or email to follow up with team members or clients.</li></ol><ol type="1" id="3b0a5000-d76c-80cf-8a70-c135c635dcda" class="numbered-list" start="3" dir="auto"><li><strong>Manual Overrides:</strong> Click into individual task cards to update statuses, manually adjust logged time, or reassign team members line-by-line.</li></ol><ol type="1" id="3b1a5000-d76c-80d5-acbf-d4a2f79b3a0f" class="numbered-list" start="4" dir="auto"><li><strong>Bulk Update: </strong>Via<strong> </strong>Bulk update tools in list and table views which acts as basic property editors.</li></ol><h3 id="3b0a5000-d76c-8023-af2d-dfc473fb11c1" class="" dir="auto"><strong>Pain Points in Rocketlane</strong></h3><ul id="3b0a5000-d76c-805c-9658-d6412ae48ee3" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Project Closeout Friction</strong><br/>Managers must move across multiple project phases to check task statuses, subtasks, dependencies, client approvals, and missing timesheets.</li></ul><ul id="3b0a5000-d76c-807e-94c0-dc2c04b22382" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Resource Workload Rebalancing</strong><br/>Auditing a team member’s task list across several active projects requires manual review of unfinished items and task‑by‑task reassignment.</li></ul><ul id="3b0a5000-d76c-8058-8094-ca761f14e779" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Bulk Update Limitations</strong><br/>Current bulk update tools act as basic property editors, still forcing managers to go through manual checking of policy violation screen by screen often leads to flawed project accounting .</li></ul><h3 id="3ada5000-d76c-80f8-aa13-d6ed99bdee79" class="" dir="auto"><strong>Impact on Project Operations:</strong></h3><ul id="3b0a5000-d76c-80ec-b932-e864ebb4d3a3" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>High Cognitive Fatigue</strong>  <br/>Managers are forced to reconcile scattered task statuses, policy rules, and project metrics across multiple views.</li></ul><ul id="3b0a5000-d76c-80c9-98e5-cf840134f45c" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Constant Context Switching</strong>  <br/>They jump between Kanban boards, resource allocation screens, and time‑tracking modules throughout the day.</li></ul><ul id="3b0a5000-d76c-8046-a6bb-f251716c3fc9" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Operational Waste</strong>  <br/>Hours of leadership time are drained by manual admin work instead of being spent on strategic client outcomes.</li></ul><ul id="3b0a5000-d76c-8006-90df-df54b9e7255d" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Risk of Inaccuracy</strong>  <br/>Bulk‑updating dozens of tasks without automated checks often leads to prematurely closed milestones, unaccountable task assignment, unbilled hours, missed client QA sign‑offs, and flawed project accounting.</li></ul><h3 id="3ada5000-d76c-8080-a5c9-c2dc3b099e45" class="" dir="auto">What success looks like:</h3><p id="3aea5000-d76c-8075-9207-d142e6712eff" class="" dir="auto">An AI-native governance experience embedded directly into Rocketlane that:</p><ul id="3aea5000-d76c-8081-8f6f-e48f120ea329" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Translates macro Intent into automated execution:</strong> Converts natural language commands (<em>e.g., &quot;Close project XYZ&quot; or &quot;Wrap up John&#x27;s tasks&quot;</em>) into structured, micro-level actions that replace tedious card-by-card clicks with batch operations.</li></ul><ul id="3aea5000-d76c-802e-8f5b-d6b0526f1c20" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Eliminates context switching:</strong> Keeps the user centered in a single workspace view, drastically reducing the need to navigate through dozens of sub-menus and individual task screens.</li></ul><ul id="3aea5000-d76c-8009-9cc5-ed35887ed072" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Reduces cognitive fatigue:</strong> Surfaces complex 4-level policy conflicts upfront through clear visual hierarchies,giving the user complete control and auditability without overwhelming them with text.</li></ul><p id="3aea5000-d76c-8016-8e4b-e007444be814" class="" dir="auto">Which can be measured by:</p><ul id="3aea5000-d76c-80d7-b840-e4c3fe3c3b8c" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Operational efficiency metrics:</strong><ul id="3aea5000-d76c-805c-aba5-df7b3cd28181" class="bulleted-list" dir="auto"><li style="list-style-type:circle"><strong>Time-to-Resolution (TTR) for Macro Operations</strong>: Average time required to close out a Rocketlane project phase or rebalance resource capacity.</li></ul><ul id="3aea5000-d76c-8053-92a7-f36f95d8e912" class="bulleted-list" dir="auto"><li style="list-style-type:circle"><strong>Task-Click Reduction Rate: </strong>Total manual page views and clicks saved across Rocketlane views.</li></ul></li></ul><ul id="3aea5000-d76c-800c-803d-f7effade4f15" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Improve User Experience and Cognitive Load Metrices</strong><ul id="3aea5000-d76c-803b-9586-cde4a8cefa9a" class="bulleted-list" dir="auto"><li style="list-style-type:circle"><strong>Conflict Resolution Friction Index (CRFI): </strong>The number of manual interventions required per policy blocker.</li></ul><ul id="3aea5000-d76c-803c-ab28-dbe256cff8fd" class="bulleted-list" dir="auto"><li style="list-style-type:circle"><strong>Context-Switching Frequency: </strong>Number of tab switches between Rocketlane views (Board, Time Tracking, Resource Management) during an audit.  </li></ul></li></ul><h1 id="3ada5000-d76c-8053-9808-dbbee594e487" class="block-color-blue" data-notion-highlight="blue" dir="auto">2. Discover Insights</h1><p id="3aea5000-d76c-8020-899d-ff2e784096b1" class="" dir="auto">To uncover root friction within Rocketlane workflows, research will be structured around qualitative contextual interviews and quantitative analytics benchmarks.<br/><br/><strong>Contextual User Interview Framework</strong></p><ol type="1" id="3aea5000-d76c-809e-888a-d2db1181f8f7" class="numbered-list" start="1" dir="auto"><li><strong>Workflow Bottlenecks &amp; Frequency:</strong><br/>   &quot;When you need to close out a project or rebalance an employee&#x27;s workload, walk me through the steps you take to ensure all subtasks, dependencies, and time logs are cleared.&quot;</li></ol><ol type="1" id="3aea5000-d76c-800a-b84e-ccc6c3311fb6" class="numbered-list" start="2" dir="auto"><li><strong>Policy Discovery Friction:</strong><br/>   &quot;How do you currently find out if a top-level task is blocked by a nested subtask or an unlogged timesheet? Do you discover this before or after attempting to mark it complete?&quot;</li></ol><ol type="1" id="3aea5000-d76c-8052-8ece-ef07afecb3e6" class="numbered-list" start="3" dir="auto"><li><strong>Context Switching &amp; Tool Fragmentation:</strong><br/>   &quot;How many different screens, tabs, or separate tools (e.g., Slack, timesheet app, board views) do you typically open to resolve a single blocked dependency chain?&quot;</li></ol><ol type="1" id="3aea5000-d76c-8090-8885-c745b3cf120d" class="numbered-list" start="4" dir="auto"><li><strong>Trust &amp; Control in Automation</strong><strong>: </strong><br/>   &quot;If an automated assistant offered to resolve multi-level task blockers for you in batch, what specific information or safeguards would you need to see before clicking &#x27;Approve&#x27;?&quot;</li></ol><ol type="1" id="3aea5000-d76c-808c-9906-c51c61b82382" class="numbered-list" start="5" dir="auto"><li><strong>Cognitive Load &amp; Time Investment:</strong><br/>   &quot;How much time do you estimate spending per week on manual administrative audits versus strategic project delivery?&quot;</li></ol><h4 id="3ada5000-d76c-80f3-8a3c-c9e6f41aa9aa" class="" dir="auto">Current user Journey:</h4><figure id="3b1a5000-d76c-805f-89b2-dfd723bf00b0" class="image" data-notion-image="image.png" dir="ltr"><a href="image.png"><img style="width:703.9874877929688px" src="image.png"/></a></figure><h4 id="3aea5000-d76c-80a8-91a5-d86c21717025" class="" dir="auto"><strong>Quantitative Research &amp; Baseline Analytics</strong></h4><table id="3aea5000-d76c-8020-9478-eac12baaa4b5" class="simple-table" dir="ltr"><thead class="simple-table-header"><tr id="3aea5000-d76c-8053-a057-d1619d47fbc0" dir="ltr"><th id=";;k_" class="simple-table-header-color simple-table-header" style="width:239.66666666666666px">Metrices</th><th id="TM:&gt;" class="simple-table-header-color simple-table-header" style="width:276.7874984741211px">What it is </th><th id="]hty" class="simple-table-header-color simple-table-header" style="width:295.5875015258789px">Benchmark Value (Assumed Value)</th></tr></thead><tbody><tr id="3aea5000-d76c-8073-a5be-c33fedc84184" dir="ltr"><td id=";;k_" class="" style="width:239.66666666666666px"><strong>Time-to-Resolution (TTR) for Macro Operations</strong></td><td id="TM:&gt;" class="" style="width:276.7874984741211px">Average time required to close out a project or rebalance a workload.</td><td id="]hty" class="" style="width:295.5875015258789px">~ 45 Minutes per closeout / rebalance workload</td></tr><tr id="3aea5000-d76c-802c-9932-c6cc79a5fdae" dir="ltr"><td id=";;k_" class="" style="width:239.66666666666666px"><strong>Task-Click Reduction Rate</strong></td><td id="TM:&gt;" class="" style="width:276.7874984741211px">Total manual page views/clicks required to handle cascading dependencies</td><td id="]hty" class="" style="width:295.5875015258789px"><strong>85 clicks</strong> (opening cards, checking subtask tabs, viewing predecessor links, entering time logs, toggling status).</td></tr><tr id="3aea5000-d76c-80d2-8192-e92b7868465d" dir="ltr"><td id=";;k_" class="" style="width:239.66666666666666px"><strong>Conflict Resolution Friction Index (CRFI)</strong></td><td id="TM:&gt;" class="" style="width:276.7874984741211px">The number of manual interventions required per policy blocker.</td><td id="]hty" class="" style="width:295.5875015258789px"><strong>4.2 manual interventions</strong> required per policy blocker (encountering blocker → investigating root task → switching to time tracker → updating status).</td></tr><tr id="3aea5000-d76c-8022-acd0-fe67ff3bf967" dir="ltr"><td id=";;k_" class="" style="width:239.66666666666666px"><strong>Context-Switching Frequency</strong></td><td id="TM:&gt;" class="" style="width:276.7874984741211px">Number of tab/board switches performed during a project closeout or workload audit.</td><td id="]hty" class="" style="width:295.5875015258789px"><strong>14 screen/tab switches</strong> (jumping between Kanban board, task detail modals, timesheets, and messaging channels to coordinate dependencies).</td></tr></tbody></table><h1 id="3b1a5000-d76c-80ec-b47a-fdc6e5ab1f61" class="block-color-blue" data-notion-highlight="blue" dir="auto">3. Define Opportunity:</h1><h4 id="3b1a5000-d76c-80dc-aa92-d162a1c46e53" class="" dir="auto"><strong>From Research to Design Strategy</strong>  </h4><p id="3b1a5000-d76c-808c-a192-e2989935fd05" class="" dir="auto">The core operational failure was reframed as a business problem, mapped to human intent through Jobs‑to‑Be‑Done (JTBD), and visualized with an Opportunity Solution Tree (OST).</p><aside class="block-color-gray_background callout" data-notion-callout="" data-notion-callout-icon="🎯" data-notion-callout-background="gray_background" style="white-space:pre-wrap;display:flex" id="3b1a5000-d76c-80c7-9dff-ebfe4a1537e0" dir="ltr"><div style="font-size:1.5em"><span class="icon" data-emoji="🎯"></span></div><div style="width:100%"><h4 id="3b1a5000-d76c-8058-ba2f-d2043b177591" class="" dir="auto"><strong>Problem Statement  </strong></h4><p id="3b1a5000-d76c-8049-a4f3-ec53325e041a" class="" dir="auto">Closing a project phase or rebalancing workloads in Rocketlane forces managers to jump across fragmented views to audit tasks, approvals, and time logs.<br/>Bulk edit tools remain basic property editors, creating friction and errors by requiring manual checkbox updates without policy validation<strong>.</strong></p><p id="3b1a5000-d76c-802c-85b2-c72e2050ae37" class="" dir="auto">This creates two critical failures:</p><ul id="3b1a5000-d76c-80ed-86a9-e4c438305fa6" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Operational Friction</strong>: Managers burn hours on card‑by‑card admin work, draining focus and delaying Time‑to‑Value.</li></ul><ul id="3b1a5000-d76c-8026-8dd9-e875466c9475" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Data and Accounting Risk</strong>: Blind bulk updates without policy checks lead to prematurely closed milestones, unbilled hours, missed QA sign‑offs, and corrupted logs.</li></ul></div></aside><p id="3b1a5000-d76c-8056-a1c4-c9417f7bc4e6" class="" dir="auto"><strong>Jobs‑to‑Be‑Done (JTBD)</strong></p><ul id="3b1a5000-d76c-808f-b9d3-dca5cb9d0661" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Primary Job (Closeout &amp; Workload Rebalancing)</strong><br/>When wrapping up a project phase or balancing workloads before the weekend, I want automated policy checks, time log audits, and capacity‑aware reassignments in one command, so I can ensure accuracy without clicking through dozens of task cards.</li></ul><ul id="3b1a5000-d76c-80b7-81f8-f53b7aa9dac7" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Supporting Jobs</strong><ul id="3b1a5000-d76c-802c-8b01-c3d11083d17c" class="bulleted-list" dir="auto"><li style="list-style-type:circle"><strong>Project Closeout</strong>: Automatically surface and resolve blockers, unlogged time, pending QA, missing client uploads, so projects aren’t closed incomplete or hours left unbilled.</li></ul><ul id="3b1a5000-d76c-80cc-bf44-f153ec5d5554" class="bulleted-list" dir="auto"><li style="list-style-type:circle"><strong>Workload Rebalancing</strong>: Get intelligent, capacity‑aware reallocation suggestions with quick manual overrides, so sprint tasks can be redistributed in seconds while keeping control.</li></ul><ul id="3b1a5000-d76c-80d4-a470-cd5e3442afef" class="bulleted-list" dir="auto"><li style="list-style-type:circle"><strong>Human‑in‑the‑Loop Governance</strong>: When batch updates run, I want clear visibility into changes and inline tools to adjust values, so I never feel like critical data is being handled by a black box.</li></ul></li></ul><h3 id="3b1a5000-d76c-8032-8e2a-ce0042066430" class="" dir="auto">Opportunity Solution Tree (OST)</h3><p id="3b1a5000-d76c-80bc-a93f-e9edf1d0850b" class="" dir="auto">The Opportunity Solution Tree maps the primary business outcome directly to identified user opportunities and the corresponding AI-native feature capabilities designed in the prototype:</p><figure id="3b1a5000-d76c-80be-800c-c7aac8070b7b" class="image" data-notion-image="OSTmap.png" dir="ltr"><a href="OSTmap.png"><img style="width:703.9750366210938px" src="OSTmap.png"/></a></figure><h3 id="3b1a5000-d76c-80b4-b9d3-c12ec96a6ea7" class="" dir="auto">Why Agent AI - Policy Governance Agent (Aligning with Rocketlane Nitro):</h3><p id="3b1a5000-d76c-8004-bc6c-e34d583a0830" class="" dir="auto">Traditional flow forces managers to grind through micro‑actions card by card. Rocketlane’s agentic AI framework (<strong>Nitro</strong>) shifts this from manual execution to intent‑driven delegation.</p><p id="3b1a5000-d76c-8037-9233-d576e402087a" class="" dir="auto">An <strong>AI Governance Agent</strong> is the right fit for project closeouts and workload rebalancing for three reasons:</p><ol type="1" id="3b1a5000-d76c-8027-b622-ebff8a25aeac" class="numbered-list" start="1" dir="auto"><li><strong>Native Fit with Nitro</strong><br/>Nitro is built around specialized agents that handle operations and enforce governance. Extending it with a <strong>Governance &amp; Triage Agent</strong> turns Nitro into an execution engine that clears policy blockers across projects.</li></ol><ol type="1" id="3b1a5000-d76c-80a0-bdea-d0fbfa7624c8" class="numbered-list" start="2" dir="auto"><li><strong>Cross‑Module Reasoning vs. Static Bulk Edit</strong><br/>Bulk edit tools may only touch a single table view. An AI Agent carries context across Rocketlane’s modules: Kanban, Resource Allocation, Time Tracking and applies policy rules like unlogged timesheets, pending QA, or dependency links before making changes.</li></ol><ol type="1" id="3b1a5000-d76c-808c-837a-df83b7af7053" class="numbered-list" start="3" dir="auto"><li><strong>Hybrid Automation with Human Control</strong><br/>Instead of opaque text responses, the agent pairs natural language intent with <strong>interactive UI cards</strong>. Managers see conflicts instantly and can override or adjust values before approving changes, keeping governance transparent and under control.</li></ol><h3 id="3b1a5000-d76c-8073-8eb8-d7bd2758599e" class="" dir="auto"><strong>Key Workflow Shift: Legacy vs. AI-Native Rocketlane</strong></h3><figure id="3b1a5000-d76c-80f4-9099-c07585a33550" class="image" data-notion-image="image%201.png" dir="ltr"><a href="image%201.png"><img style="width:703.9874877929688px" src="image%201.png"/></a></figure><h3 id="3b1a5000-d76c-80e1-b6d5-ffff35129a20" class="" dir="auto"><strong>Key Opportunity Statements &amp; JTBD</strong></h3><ul id="3b1a5000-d76c-80f2-9a99-cf153c76e2fc" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>JTBD 1 (Project Closeout):</strong> <em>&quot;When I need to mark an onboarding phase complete in Rocketlane, I want to execute all cascading dependency checks, timesheet audits, and milestone validations in one action, so that I can lock project accounting without clicking through dozens of cards.&quot;</em></li></ul><ul id="3b1a5000-d76c-8029-91ef-eab1848ea2e5" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>JTBD 2 (Capacity-Aware Workload Rebalancing):</strong> <em>&quot;When a team member is overloaded or out of office, I want Rocketlane to surface their open tasks and suggest capacity-aware team reassignments, so that I can rebalance sprint workloads in seconds.&quot;</em></li></ul><ul id="3b1a5000-d76c-8005-baeb-ec9475e492b2" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>JTBD 3 (Governance &amp; Manual Override):</strong> <em>&quot;When automated rules resolve project blockers, I want full visibility into what changed and the ability to manually override time entries or team assignments directly in the chat card.</em></li></ul><table id="3b1a5000-d76c-805d-ab3f-ea4394e79c5e" class="simple-table" dir="ltr"><thead class="simple-table-header"><tr id="3b1a5000-d76c-80bd-ac59-df277324b25b" dir="ltr"><th id=";;k_" class="simple-table-header-color simple-table-header" style="width:239.66666666666666px">Metrices</th><th id="TM:&gt;" class="simple-table-header-color simple-table-header" style="width:276.7874984741211px">What it is </th><th id="]hty" class="simple-table-header-color simple-table-header" style="width:295.5875015258789px">Benchmark Value (Assumed Value)</th><th id="hd[P" class="simple-table-header-color simple-table-header">Target Value<br/>(Project Governance Agent)</th></tr></thead><tbody><tr id="3b1a5000-d76c-805f-8299-cc673e6f5d09" dir="ltr"><td id=";;k_" class="" style="width:239.66666666666666px"><strong>Time-to-Resolution (TTR) for Macro Operations</strong></td><td id="TM:&gt;" class="" style="width:276.7874984741211px">Average time required to close out a project or rebalance a workload.</td><td id="]hty" class="" style="width:295.5875015258789px">~ 45 Minutes per closeout / rebalance workload</td><td id="hd[P" class=""><strong>&lt; 2 Minutes</strong> per operation</td></tr><tr id="3b1a5000-d76c-803b-acd1-e54c274ca404" dir="ltr"><td id=";;k_" class="" style="width:239.66666666666666px"><strong>Task-Click Reduction Rate</strong></td><td id="TM:&gt;" class="" style="width:276.7874984741211px">Total manual page views/clicks required to handle cascading dependencies</td><td id="]hty" class="" style="width:295.5875015258789px"><strong>85 clicks</strong> (opening cards, checking subtask tabs, viewing predecessor links, entering time logs, toggling status).</td><td id="hd[P" class=""><strong>3–5 clicks</strong> (intent prompt + inline override/approval).</td></tr><tr id="3b1a5000-d76c-80f5-aaee-ca49fe3851f5" dir="ltr"><td id=";;k_" class="" style="width:239.66666666666666px"><strong>Conflict Resolution Friction Index (CRFI)</strong></td><td id="TM:&gt;" class="" style="width:276.7874984741211px">The number of manual interventions required per policy blocker.</td><td id="]hty" class="" style="width:295.5875015258789px"><strong>4.2 manual interventions</strong> required per policy blocker (encountering blocker → investigating root task → switching to time tracker → updating status).</td><td id="hd[P" class=""><strong>1 inline action</strong> (direct manual edit or auto-suggested resolution).</td></tr><tr id="3b1a5000-d76c-807c-8c34-d9bbe4d901a7" dir="ltr"><td id=";;k_" class="" style="width:239.66666666666666px"><strong>Context-Switching Frequency</strong></td><td id="TM:&gt;" class="" style="width:276.7874984741211px">Number of tab/board switches performed during a project closeout or workload audit.</td><td id="]hty" class="" style="width:295.5875015258789px"><strong>14 screen/tab switches</strong> (jumping between Kanban board, task detail modals, timesheets, and messaging channels to coordinate dependencies).</td><td id="hd[P" class=""><strong>0 switches</strong> (100% contained within the AI Agent workspace).</td></tr></tbody></table><h1 id="3b1a5000-d76c-80ce-9503-f4e527a3bcfe" class="block-color-blue" data-notion-highlight="blue" dir="auto">4. Design &amp; Iterate:</h1><p id="3b1a5000-d76c-80a9-903c-f724fa75fa6d" class="" dir="auto">As an enterprise AI agent comprehends massive amounts of underlying data and complex cross-project interactions, I defined core architectural principles to solve this complexity, ensuring managers are never overwhelmed by data while retaining full operational control.</p><ul id="3b1a5000-d76c-806e-964f-ca7206448df6" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Progressive Disclosure and Cognitive Chunking</strong>  <br/>Loading dozens of task statuses and warnings in one response overwhelms managers. Summarize at the macro level first (<em>“1 project blocked”</em>), with deeper details hidden inside collapsible UI cards that expand only when needed.</li></ul><ul id="3b1a5000-d76c-8035-afce-ca3e295dcb2c" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Explainable AI with Provenance Cards</strong>  <br/>Managers won’t trust automated reassignments or time suggestions without transparency. Every recommendation should carry a clear reasoning badge (e.g., <em>“Suggested 2.5h based on historical average”</em> or <em>“Reassigned to Cameron, 15% bandwidth remaining”</em>).</li></ul><ul id="3b1a5000-d76c-805a-84b8-df56cd79c7e3" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Hybrid Automation with Direct Manipulation</strong>  <br/>Text‑only outputs force “take it or leave it” decisions. Pair automated defaults with inline input fields and dropdowns inside chat cards, so managers can tweak hours or assignees instantly without leaving the thread.</li></ul><ul id="3b1a5000-d76c-8086-ac1f-fe4a5f008d1c" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Fail‑Safe Governance and Auditability</strong>  <br/>Batch updates risk corrupting records or skipping approvals. Enforce mandatory override reasons and pre‑execution confirmation modals before changes go live, ensuring accountability and audit trails.</li></ul><h3 id="3b1a5000-d76c-8097-b9c8-c249312d6160" class="" dir="auto">Proposed User Flow for Project closeout “Mark all my projects completed”:</h3><figure id="3b1a5000-d76c-807b-a921-d01202bbb2f4" class="image" data-notion-image="image%202.png" dir="ltr"><a href="image%202.png"><img style="width:704px" src="image%202.png"/></a></figure><h4 id="3b1a5000-d76c-8072-aa09-c273b41713f4" class="" dir="auto">Key Highlights:</h4><ul id="3b1a5000-d76c-80f3-ae40-cc5208e05f04" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Demonstrates User Autonomy:</strong> The flow does not forces managers in a “black-box” automated decision, it allows managers/leads to choose between high-speed automation and precise manual control.</li></ul><ul id="3b1a5000-d76c-801e-82e6-c89b51304b62" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Proves Multi-Level Dependency Handling:</strong> Multi level dependency handling: Flow illustrates how resolving a single Level 4 root cause automatically unblocks Level 3 subtasks, Level 2 milestones, and the Level 1 parent project.</li></ul><ul id="3b1a5000-d76c-802c-a757-ee6ac2b7a0d4" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>5-Second Undo Safety Toast:</strong> Acts as a frictionless safety net by holding backend execution for 5 seconds immediately after a user confirms a bulk action, allowing instant one-click cancellations before any real database changes occur without slowing down power users with confirmation modals.</li></ul><h3 id="3b1a5000-d76c-8028-a47c-fe418df1c95c" class="" dir="auto">Proposed User Flow for Workload Rebalancing “Wrap Lisa’s Work With in Friday ”:</h3><figure id="3b1a5000-d76c-800b-97a5-f0182f745019" class="image" data-notion-image="image%203.png" dir="ltr"><a href="image%203.png"><img style="width:704px" src="image%203.png"/></a></figure><h4 id="3b1a5000-d76c-8079-bfd6-e8195f5b3699" class="" dir="auto">Key Highlights:</h4><ul id="3b1a5000-d76c-8025-ac76-e8908fb3f267" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Capacity‑Aware AI Reasoning</strong>  <br/>The agent doesn’t reassign tasks blindly. It factors in live sprint bandwidth before suggesting new owners, ensuring workloads stay balanced.</li></ul><ul id="3b1a5000-d76c-80b4-a93f-d8f7e7fa377a" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Proactive Downstream Communication</strong>  <br/>Resolving workload friction automatically triggers team notifications via Slack or email so everyone stays aligned without extra manual steps.</li></ul><h4 id="3b1a5000-d76c-80c3-83ed-c9c3587cb843" class="" dir="auto">Final Customer journey:<br/></h4><figure id="3b1a5000-d76c-8060-a3bb-c8d20c856386" class="image" data-notion-image="image%204.png" dir="ltr"><a href="image%204.png"><img style="width:704px" src="image%204.png"/></a></figure><h3 id="3b1a5000-d76c-8046-943d-ee756b50ac91" class="" dir="auto">Iterations:</h3><p id="3b1a5000-d76c-806d-83d3-f9904505f52d" class="" dir="auto">During the design phase, three distinct visual layouts were prototyped to determine the most effective way to present multi-level project blockers without causing cognitive overload for Engagement Managers.</p><p id="3b1a5000-d76c-8058-9b4f-e3d342ada8be" class="" dir="auto"><strong>Iteration 1: Horizontal Policy Board (Linear Triage)</strong></p><ul id="3b1a5000-d76c-8075-a8b3-d808cdb01b1e" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Concept:</strong> Organizes issues into step-by-step columns: <em>1. Root Policy Violations</em>, <em>2. Dependent Blocked Tasks</em>, and <em>3. Target Output</em>.</li></ul><ul id="3b1a5000-d76c-806f-8167-c2838da800b2" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Key Insight:</strong> While it cleanly separates root causes from downstream effects, horizontal scrolling across enterprise screens created unnecessary friction during rapid triage.</li></ul><figure id="3b1a5000-d76c-806d-b97b-f8313e7383bd" class="image" data-notion-image="Screenshot_2026-08-03_073147.png" dir="ltr"><a href="Screenshot_2026-08-03_073147.png"><img style="width:703.9874877929688px" src="Screenshot_2026-08-03_073147.png"/></a></figure><p id="3b1a5000-d76c-8012-a0c3-f9b523756871" class="" dir="auto"><strong>Iteration 2: Interactive Timeline Cascade (Gantt Schedule View)</strong></p><ul id="3b1a5000-d76c-8073-aeb9-ec2545a0eccd" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Concept:</strong> Maps root-cause delays onto a horizontal schedule timeline, showing how <code>TSK-302</code> delays <code>PRJ-102 Project Closeout</code>.</li></ul><ul id="3b1a5000-d76c-80b9-b39c-c50f1d74f305" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Key Insight:</strong> Highly effective for time-sensitive scheduling, but it hid actionable micro-controls (such as direct time logging inputs and policy override buttons) behind extra hover and click states.</li></ul><figure id="3b1a5000-d76c-8093-a6e0-de1ab7cb627a" class="image" data-notion-image="Screenshot_2026-08-03_073412.png" dir="ltr"><a href="Screenshot_2026-08-03_073412.png"><img style="width:703.9874877929688px" src="Screenshot_2026-08-03_073412.png"/></a></figure><p id="3b1a5000-d76c-80c2-9740-deecc6448239" class="" dir="auto"><strong>Iteration 3: Node Topology Canvas (Visual Dependency Mapping)</strong></p><ul id="3b1a5000-d76c-809e-8e2d-ffe4bbf00678" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Concept:</strong> Renders a vertical node diagram (<code>Level 1 Project</code> → <code>Level 2 Milestone</code> → <code>Level 3 Subtask</code>) on an infinite dot-grid canvas.</li></ul><ul id="3b1a5000-d76c-8009-af8a-d8bbd2a42aaf" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Key Insight:</strong> Excellent for macro topology visualization, but forcing users onto a full-screen canvas detached them from Rocketlane&#x27;s primary conversational workspace, adding unnecessary visual noise.</li></ul><figure id="3b1a5000-d76c-8059-b343-d7ecddf555a1" class="image" data-notion-image="Screenshot_2026-08-03_073437.png" dir="ltr"><a href="Screenshot_2026-08-03_073437.png"><img style="width:703.9874877929688px" src="Screenshot_2026-08-03_073437.png"/></a></figure><p id="3b1a5000-d76c-80c5-97bb-da98f8ef6e99" class="" dir="auto"><strong>Iteration 4: Conversational Triage Matrix (Currently Implemented)</strong></p><figure id="3b1a5000-d76c-806b-8fde-f5d68c28b277" class="image" data-notion-image="Screenshot_2026-08-03_074820.png" dir="ltr"><a href="Screenshot_2026-08-03_074820.png"><img style="width:703.9750366210938px" src="Screenshot_2026-08-03_074820.png"/></a></figure><h3 id="3b1a5000-d76c-800a-bf19-e6ccc7c0ec2e" class="" dir="auto">Why the Final Conversational Matrix Won (Key Highlights and UX features)</h3><p id="3b1a5000-d76c-8054-a62b-d1c64721dc8a" class="" dir="auto">Testing these explorations led directly to the final <strong>3-Turn Conversational Matrix</strong> layout:</p><ul id="3b1a5000-d76c-8079-833e-da81cf666461" class="bulleted-list" dir="auto"><li style="list-style-type:disc">Low learning curve, Simple spatial complexity (Standard grid/columns) and best for Action-first triage &amp; policy-based organization</li></ul><ul id="3b1a5000-d76c-802c-a86f-e9cb35986405" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>4-Level Visual Hierarchy:</strong><ul id="3b1a5000-d76c-8045-b91b-f2db4a8c45e6" class="bulleted-list" dir="auto"><li style="list-style-type:circle">Displays the explicit parent-to-child dependency chain (<code>L1 Project</code> → <code>L2 Milestone</code> → <code>L3 Subtask</code> → <code>L4 Root Cause</code>) so managers instantly understand <em>why</em> a project closeout is halted.</li></ul></li></ul><ul id="3b1a5000-d76c-80a6-8d54-ff47724961ce" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Progressive Disclosure &amp; Cognitive Chunking:</strong><ul id="3b1a5000-d76c-808a-846c-ce751a7c1b3c" class="bulleted-list" dir="auto"><li style="list-style-type:circle">Replaces overwhelming multi-tab navigation with a structured, single-card layout that highlights only active policy violations, drastically reducing cognitive load.</li></ul></li></ul><ul id="3b1a5000-d76c-8042-a0ad-f41cba0ef896" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Direct Maneuverable (Human-in-the-Loop Controls):</strong><ul id="3b1a5000-d76c-8053-babc-e16943658ffe" class="bulleted-list" dir="auto"><li style="list-style-type:circle">Integrates editable input fields (e.g., live <code>[ 02:30 ]</code> time log boxes) and capacity-aware team reassignment dropdowns right inside the chat card for instant micro-adjustments.</li></ul></li></ul><ul id="3b1a5000-d76c-80b3-9426-f12486ca220a" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Cascading Auto-Resolution Engine:</strong><ul id="3b1a5000-d76c-803e-85c7-d68a37d4a564" class="bulleted-list" dir="auto"><li style="list-style-type:circle">Resolving the root-cause blocker at <code>L4</code> automatically clears and updates all parent dependencies up to <code>L1</code>, transitioning the matrix into an emerald <strong>Resolved State</strong> with zero manual overhead.</li></ul></li></ul><ul id="3b1a5000-d76c-8038-ac2a-ee02552f79ad" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Dual Resolution Pathways:</strong><ul id="3b1a5000-d76c-8088-9e3b-d265b409bef0" class="bulleted-list" dir="auto"><li style="list-style-type:circle">Empowers managers to choose between a <strong>1-Click Auto-Resolution</strong> (AI calculates historical time averages) and an <strong>Interactive Inspection Path</strong> (manual review and override).</li></ul></li></ul><ul id="3b1a5000-d76c-8003-b22d-e854e274e944" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Zero View Switches:</strong> Managers get complete visibility into 4-level deep dependency chains and instant, editable controls without jumping to external Gantt charts or spatial node canvases.</li></ul><h1 id="3b1a5000-d76c-8017-958d-dbf4bd085307" class="block-color-blue" data-notion-highlight="blue" dir="auto">5. Validate</h1><p id="3b1a5000-d76c-80c1-b40b-f82cd381769e" class="" dir="auto"><strong>Prototype Testing &amp; Feedback</strong><br/>The solution was validated using a high-fidelity interactive web prototype simulating Rocketlane&#x27;s UI environment, complete with real-time conversational states, animated thinking indicators, dynamic card transitions, and editable time input fields with real users:</p><ul id="3b1a5000-d76c-804a-a000-cc431d10b015" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Competitor Tool Power Users (no of users=2):</strong> Compared the 3-turn triage flow against traditional bulk-edit/Gantt workflows in Jira and Asana for speed and clarity. </li></ul><ul id="3b1a5000-d76c-80de-90e8-c89fb8368af1" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>UX/Product Designers (n of users =1):</strong> Validated visual hierarchy, cognitive load, and human-in-the-loop control patterns.</li></ul><ul id="3b1a5000-d76c-80cd-af10-fa9d263ecec9" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Domain-Experienced Project &amp; Program Managers (no of users =2): </strong>Evaluated business logic, policy override safety, and real-world applicability of the time log calculations.</li></ul><p id="3b1a5000-d76c-8070-9fb2-e0de98d8ddb8" class="" dir="auto"><strong>What Works well:</strong></p><ul id="3b1a5000-d76c-80ae-ab58-c9871fd07cbd" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Control vs. Automation</strong>  <br/>Onboarding managers preferred interactive cards embedded in the chat stream over text‑only AI. Editable input fields turned the AI from an unpredictable black box into a trusted co‑pilot.</li></ul><ul id="3b1a5000-d76c-802b-820a-cccbff76fd57" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Compliance and Audit Trails</strong>  <br/>Adding an Admin Governance Override reason field met enterprise compliance needs for force‑approving blocked tasks.</li></ul><ul id="3b1a5000-d76c-80da-97c6-f2678749037f" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>At‑a‑Glance Scannability</strong>  <br/>Color‑coded status tokens Coral for Blocked, Amber for Action Required, Emerald for Resolved, let managers scan project health in seconds.</li></ul><p id="3b1a5000-d76c-802b-9159-daec12f48dbb" class="" dir="auto"><strong>Areas to Improve (Yet to Implement):</strong></p><ul id="3b1a5000-d76c-80f7-9f82-ca735b16b027" class="bulleted-list" dir="auto"><li style="list-style-type:disc">Edge Case: Missing Historical Logging Data<ul id="3b1a5000-d76c-80ae-83ec-d3160b6d8b13" class="bulleted-list" dir="auto"><li style="list-style-type:circle">Problem: What if the AI cannot calculate an expected time log for a novel task type due to lack of historical data?</li></ul><ul id="3b1a5000-d76c-804c-9dd9-f38f55fcf083" class="bulleted-list" dir="auto"><li style="list-style-type:circle">Fail safe design: <br/>The agent gracefully falls back to the manual inspection path, highlighting the input field with a prompt: <code>No historical baseline found • Please input estimated hours manually</code></li></ul></li></ul><h1 id="3b1a5000-d76c-80e7-866f-d061b875d0b5" class="block-color-blue" data-notion-highlight="blue" dir="auto">6. Measure and Learn</h1><h3 id="3b1a5000-d76c-80a7-b378-dbc8f27cc075" class="" dir="auto">Measure: </h3><p id="3b1a5000-d76c-808d-bbbc-f149ffa1818a" class="" dir="auto"><strong>Post-Launch Impact Framework</strong></p><p id="3b1a5000-d76c-80e3-a561-fa8b58599d13" class="" dir="auto">Once deployed to Rocketlane enterprise accounts, impact will be tracked against baseline operational metrics:</p><table id="3b1a5000-d76c-8088-9bf1-d3634f1d800c" class="simple-table" dir="ltr"><thead class="simple-table-header"><tr id="3b1a5000-d76c-80d1-958b-dfcb8793f924" dir="ltr"><th id=";;k_" class="simple-table-header-color simple-table-header" style="width:239.66666666666666px">Metrices</th><th id="]hty" class="simple-table-header-color simple-table-header" style="width:295.5875015258789px">Benchmark Value (Assumed Value)</th><th id="hd[P" class="simple-table-header-color simple-table-header">Target Value<br/>(Project Governance Agent)</th><th id="?G@q" class="simple-table-header-color simple-table-header">Projected Value</th></tr></thead><tbody><tr id="3b1a5000-d76c-80b9-aab7-ecb28d41547a" dir="ltr"><td id=";;k_" class="" style="width:239.66666666666666px"><strong>Time-to-Resolution (TTR) for Macro Operations</strong></td><td id="]hty" class="" style="width:295.5875015258789px">~ 45 Minutes per closeout / rebalance workload</td><td id="hd[P" class=""><strong>&lt; 2 Minutes</strong> per operation</td><td id="?G@q" class=""><strong>1.5 mins (-96.6%)</strong></td></tr><tr id="3b1a5000-d76c-802b-9c44-cc3dc8a79cc8" dir="ltr"><td id=";;k_" class="" style="width:239.66666666666666px"><strong>Task-Click Reduction Rate</strong></td><td id="]hty" class="" style="width:295.5875015258789px"><strong>85 clicks</strong> (opening cards, checking subtask tabs, viewing predecessor links, entering time logs, toggling status).</td><td id="hd[P" class=""><strong>3–5 clicks</strong> (intent prompt + inline override/approval).</td><td id="?G@q" class=""><strong>3 Clicks</strong>  (-96.4%)</td></tr><tr id="3b1a5000-d76c-8060-b66d-ca7376b23e5c" dir="ltr"><td id=";;k_" class="" style="width:239.66666666666666px"><strong>Conflict Resolution Friction Index (CRFI)</strong></td><td id="]hty" class="" style="width:295.5875015258789px"><strong>4.2 manual interventions</strong> required per policy blocker (encountering blocker → investigating root task → switching to time tracker → updating status).</td><td id="hd[P" class=""><strong>1 inline action</strong> (direct manual edit or auto-suggested resolution).</td><td id="?G@q" class="">-</td></tr><tr id="3b1a5000-d76c-8065-aeb0-fba5164d9e7d" dir="ltr"><td id=";;k_" class="" style="width:239.66666666666666px"><strong>Context-Switching Frequency</strong></td><td id="]hty" class="" style="width:295.5875015258789px"><strong>14 screen/tab switches</strong> (jumping between Kanban board, task detail modals, timesheets, and messaging channels to coordinate dependencies).</td><td id="hd[P" class=""><strong>0 switches</strong> (100% contained within the AI Agent workspace).</td><td id="?G@q" class=""><strong>0 switches</strong> (100% contained within the AI Agent workspace).</td></tr></tbody></table><h4 id="3b1a5000-d76c-807b-8b5c-e2c773e959b5" class="" dir="auto">Learn:</h4><p id="3b1a5000-d76c-80bd-b356-dcc904bf5c73" class="" dir="auto">Two features were implemented to track adoption and maintain oversight:</p><ul id="3b1a5000-d76c-804c-b738-e4a55835f1fa" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Agent Introduction</strong>: Delivered through a coachmark or pop‑over to guide managers at first use.</li></ul><ul id="3b1a5000-d76c-8062-8d55-d7e2aebdf630" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Inline Survey</strong>: Triggered after the <em>“Mark My Projects Completed”</em> action, capturing immediate feedback in context.</li></ul><p id="3b1a5000-d76c-8005-801d-de511d1655ff" class="" dir="auto"><strong>Micro‑CSAT and In‑Context Sentiment Tracking</strong></p><ul id="3b1a5000-d76c-80d8-ba59-d20f62af5722" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Inline Feedback Placement</strong>: A passive micro‑survey sits inside the Emerald Resolved Card at task completion, avoiding disruptive pop‑ups.</li></ul><ul id="3b1a5000-d76c-800f-b89c-fb0351b76e65" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Dual Signal Capture</strong>:<ul id="3b1a5000-d76c-80dc-bb07-e416262ff000" class="bulleted-list" dir="auto"><li style="list-style-type:circle">Thumbs Up/Down to measure AI accuracy (<em>“Did the agent fix the right root cause?”</em>).</li></ul><ul id="3b1a5000-d76c-803f-8f82-fc7bdfb45543" class="bulleted-list" dir="auto"><li style="list-style-type:circle">1–5 Customer Effort Score (Customer Effort Score) to measure workflow friction (<em>“How effortless was this compared to manual edits?”</em>).</li></ul></li></ul><ul id="3b1a5000-d76c-802a-9b55-e91db7e876a8" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Target Benchmark</strong>: Maintain &gt;90% positive accuracy on auto‑resolved blockers and keep CES below 1.5/5.</li></ul><p id="3b1a5000-d76c-8057-aab2-fa2f74cf4f8b" class="" dir="auto"><strong>Feature Discovery and Adoption Mechanics</strong></p><ul id="3b1a5000-d76c-8000-bb36-fdc1419d39cf" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Contextual Discovery Toast</strong>: A lightweight, coach mark/popover on assistant icon (<em>“✨ Meet the Governance Agent: Audit and resolve blockers in seconds”</em>).</li></ul><ul id="3b1a5000-d76c-8036-895b-d5d670a5a5bb" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Core Telemetry Metrics</strong>:<ul id="3b1a5000-d76c-803c-829e-fe3d3e39bce0" class="bulleted-list" dir="auto"><li style="list-style-type:circle"><strong>Discovery CTR</strong>: Tracks how many managers click to test conversational commands versus sticking with traditional navigation.</li></ul><ul id="3b1a5000-d76c-80c0-8222-fcb1ed7f4eae" class="bulleted-list" dir="auto"><li style="list-style-type:circle"><strong>Path Preference Distribution</strong>: Monitors adoption shift between Path A (1‑Click Auto‑Resolve) and Path B (Manual Inspection).</li></ul><ul id="3b1a5000-d76c-806a-a552-cae07b6c3ef8" class="bulleted-list" dir="auto"><li style="list-style-type:circle"><strong>14‑Day Repeat Usage</strong>: Measures whether managers return to conversational triage for weekly closeouts, validating lasting behavior change.</li></ul></li></ul><figure id="3b1a5000-d76c-8081-847c-f81385628592" class="link-to-page"><a href="https://app.notion.com/p/REview-3b1a5000d76c8081847cf81385628592?pvs=21" data-notion-page-id="3b1a5000-d76c-8081-847c-f81385628592" data-notion-space-id="5bcf8cdc-4152-4cf3-9550-b9bc12f946bf">REview</a></figure></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

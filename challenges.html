@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Design Challenges - Rocketlane</title>
+    <link href="styles.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="app-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>Rocketlane Project Governance Agent Design process documentation</h1>
+            </div>
+            <ul class="tree-menu">
+                <li><a href="index.html">Design Process</a></li>
+                <li><a class="active" href="challenges.html">Key design challenges and reasonings</a></li>
+                <li><a href="handoff.html">Developer hand off</a></li>
+            </ul>
+        </aside>
+        <main class="content-area">
+            <div class="page-content">
+                <header class="page-header">
+                    <h1 class="page-title">Key design challenges and reasonings</h1>
+                    <p class="page-description">A reflection on the hurdles faced during the project and how i overcame
+                        them.</p>
+                </header>
+                <section class="content-section">
+                    <h2>Balancing Data Density</h2>
+                    <p>One of the primary challenges was displaying a large amount of complex project data without
+                        overwhelming the user. i tackled this by utilizing progressive disclosure and clear
+                        typographical hierarchies.</p>
+                    <div class="injected-content">
+                        <h1 class="eyebrow-heading">UX CASE STUDY • ARCHITECTURAL DESIGN RATIONALE</h1>
+                        <p class="subtitle">Rocketlane Nitro Agent: Design Challenges &amp; UI Patterns</p>
+                        <div class="meta-bar">
+                            <div class="meta-item"><span class="meta-icon">📁</span><div><span>PROJECT</span><strong>Rocketlane Nitro AI Agent</strong></div></div>
+                            <div class="meta-item"><span class="meta-icon">👤</span><div><span>ROLE</span><strong>Lead Product Designer</strong></div></div>
+                            <div class="meta-item"><span class="meta-icon">🎯</span><div><span>FOCUS AREA</span><strong>Governance &amp; Triage</strong></div></div>
+                            <div class="meta-item"><span class="meta-icon">📈</span><div><span>KEY METRIC</span><strong>94% Faster Closeouts</strong></div></div>
+                        </div>
+                        <h2>Overview</h2>
+                        <p>Designing AI for enterprise project management tools carries significant risk. While AI
+                            errors in consumer apps are minor annoyances, mistakes in platforms like Rocketlane can
+                            corrupt billable hours, break project budgets, or accidentally archive live client projects.
+                            Below is a breakdown of the 5 key design challenges, UI patterns, and trade-offs engineered
+                            to maintain complete human-in-the-loop control.</p>
+                        <h2>Design Challenges &amp; Solution Architectures</h2>
+                        
+                        <div class="challenge-block">
+                            <div class="challenge-header">
+                                <div class="challenge-number">1</div>
+                                <h3>Building User Trust in Autonomous Workflows</h3>
+                            </div>
+                            <div class="challenge-content">
+                                <p><strong class="label-problem">The Problem:</strong> Early prototypes executed commands like “Mark all projects completed” instantly, causing user mistrust on live client data.</p>
+                                <p><strong class="label-solution">The Solution:</strong> Implemented a mandatory 2-step audit preview pattern stopping execution before database writes, offering dual paths (Auto-Resolve vs. Inspect Details).</p>
+                            </div>
+                            <!-- Project Closeout Audit UI Image -->
+                            <img class="doc-image" src="images/challenges/image2.png" alt="Project Closeout Audit UI" />
+                            <div class="rationale">
+                                <div class="rationale-icon">💡</div>
+                                <div><strong>Rationale:</strong> Turning the AI from an autonomous worker into a transparent assistant creates complete data safety and increases user adoption.</div>
+                            </div>
+                        </div>
+                        <div class="challenge-block">
+                            <div class="challenge-header">
+                                <div class="challenge-number">2</div>
+                                <h3>Context Switching Across Multiple Tabs</h3>
+                            </div>
+                            <div class="challenge-content">
+                                <p><strong class="label-problem">The Problem:</strong> Resolving policy blockers forced users to open separate browser tabs for tasks, timesheets, and boards.</p>
+                                <p><strong class="label-solution">The Solution:</strong> Built direct inline editability into the chat card component. Users can adjust time entries or reassign team members inside the chat stream.</p>
+                            </div>
+                            <!-- Conflict Matrix and Task Breakdown Images -->
+                            <img class="doc-image" src="images/challenges/image3.png" alt="Conflict Matrix UI" />
+                            <img class="doc-image" src="images/challenges/image4.png" alt="Task Breakdown UI" />
+                            <div class="rationale">
+                                <div class="rationale-icon">💡</div>
+                                <div><strong>Rationale:</strong> Reduced total click overhead for project closeouts from 84 clicks down to 3.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="challenge-block">
+                            <div class="challenge-header">
+                                <div class="challenge-number">3</div>
+                                <h3>Opaque Subtask &amp; Dependency Blockers</h3>
+                            </div>
+                            <div class="challenge-content">
+                                <p><strong class="label-problem">The Problem:</strong> Generic error messages obscured deep multi-level dependency chains.</p>
+                                <p><strong class="label-solution">The Solution:</strong> Visualized a 4-level nested dependency hierarchy inside the card: Project (L1) → Milestone (L2) → Task (L3) → Root Cause (L4).</p>
+                            </div>
+                            <!-- Nested Dependency Table Image -->
+                            <img class="doc-image" src="images/challenges/image5.png" alt="Nested Dependency UI" />
+                            <div class="rationale">
+                                <div class="rationale-icon">💡</div>
+                                <div><strong>Rationale:</strong> Lets managers pinpoint the exact root cause in seconds without digging through sub-menus.</div>
+                            </div>
+                        </div>
+                        <div class="challenge-block">
+                            <div class="challenge-header">
+                                <div class="challenge-number">4</div>
+                                <h3>Instant Bulk Action Risk &amp; Safety Nets</h3>
+                            </div>
+                            <div class="challenge-content">
+                                <p><strong class="label-problem">The Problem:</strong> Destructive bulk updates needed a safety net without modal pop-ups slowing down power users.</p>
+                                <p><strong class="label-solution">The Solution:</strong> Engineered a 5-second deferred execution toast banner with an active countdown timer and immediate "Undo" capability.</p>
+                            </div>
+                            <!-- Deferred Execution Toast Image -->
+                            <img class="doc-image" src="images/challenges/image6.png" alt="Deferred Execution UI" />
+                            <div class="rationale">
+                                <div class="rationale-icon">💡</div>
+                                <div><strong>Rationale:</strong> Holds backend execution for 5 seconds post-confirmation, providing speed with zero modal friction.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="challenge-block">
+                            <div class="challenge-header">
+                                <div class="challenge-number">5</div>
+                                <h3>Feature Discovery Without Workspace Disruption</h3>
+                            </div>
+                            <div class="challenge-content">
+                                <p><strong class="label-problem">The Problem:</strong> Pop-up modals are dismissed instantly by busy users without reading.</p>
+                                <p><strong class="label-solution">The Solution:</strong> Integrated a top-bar banner ('Meet the Governance Agent') alongside inline micro-surveys post-execution.</p>
+                            </div>
+                            <!-- Top-Bar Banner Feature Discovery Image -->
+                            <img class="doc-image" src="images/challenges/image7.png" alt="Feature Discovery UI" />
+                            <div class="rationale">
+                                <div class="rationale-icon">💡</div>
+                                <div><strong>Rationale:</strong> Respects the user's workspace while collecting real-time operational feedback.</div>
+                            </div>
+                        </div>
+                        <h2>Summary of Design Trade-offs</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Chosen Approach</th>
+                                    <th>Alternative Considered</th>
+                                    <th>Why Rejected</th>
+                                    <th>Final Outcome</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Audit Preview Card</strong></td>
+                                    <td>Full AI Auto-Pilot</td>
+                                    <td>Users fear loss of control and corrupted data.</td>
+                                    <td>Data safety &amp; high user trust.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Inline Chat Card Edits</strong></td>
+                                    <td>Redirect to Task Tabs</td>
+                                    <td>High cognitive fatigue and too many open tabs.</td>
+                                    <td>96% click reduction (84 → 3 clicks).</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Undo Control</strong></td>
+                                    <td>Modal Confirmation Popup</td>
+                                    <td>Extra modal popups slow down power users.</td>
+                                    <td>Fast execution with instant safety net.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Top-Bar Banner</strong></td>
+                                    <td>Center Pop-Up Modal</td>
+                                    <td>Users dismiss pop-ups without reading.</td>
+                                    <td>Higher organic adoption without disruption.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                <nav class="pagination"><a class="page-btn prev" href="index.html"><span class="btn-label">Previous
+                            Page</span><span class="btn-title">Design Process</span></a><a class="page-btn next"
+                        href="handoff.html"><span class="btn-label">Next Page</span><span class="btn-title">Developer
+                            hand off</span></a></nav>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+    <div class="lightbox-modal" id="lightbox-modal"><span class="lightbox-close">×</span><img class="lightbox-content"
+            id="lightbox-img" /></div>
+</body>
+
+</html>

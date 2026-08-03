@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Developer Handoff - Rocketlane</title>
+<link href="styles.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="app-layout">
+<aside class="sidebar">
+<div class="sidebar-header">
+<h1>Rocketlane Project Governance Agent Design process documentation</h1>
+</div>
+<ul class="tree-menu"><li><a href="index.html">Design Process</a></li><li><a href="challenges.html">Key design challenges and reasonings</a></li><li><a class="active" href="handoff.html">Developer hand off</a></li></ul>
+</aside>
+<main class="content-area">
+<div class="page-content">
+<header class="page-header">
+<h1 class="page-title">Developer hand off</h1>
+<p class="page-description">Detailed specifications, asset links, and component structures required for engineering execution.</p>
+</header>
+<section class="content-section">
+<h2>Architecture Overview</h2>
+<p>This document details the expected technical implementation, state management patterns, and CSS architecture to ensure visual consistency between design and code.</p>
+<div class="injected-content">
+
+  <div class="callout-note">
+    <p><strong>NOTE:</strong> This document outlines the core design tokens, architecture, and styling guidelines required to translate the design into the frontend implementation for the Project Governance Agent application.</p>
+  </div>
+
+  <h2>🎨 1. Design Tokens</h2>
+  
+  <h3>Colors</h3>
+  <div class="color-grid">
+    <div class="color-card">
+      <div class="color-swatch" style="background-color: #f7f9fa; border-bottom: 1px solid #e2e8f0;"></div>
+      <div class="color-details">
+        <span class="color-name">Background</span>
+        <code>#f7f9fa</code>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background-color: #3b82f6;"></div>
+      <div class="color-details">
+        <span class="color-name">Primary Accent</span>
+        <code>#3b82f6</code>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background-color: #8b5cf6;"></div>
+      <div class="color-details">
+        <span class="color-name">Governance Purple</span>
+        <code>#8b5cf6</code>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background-color: #10b981;"></div>
+      <div class="color-details">
+        <span class="color-name">Success Green</span>
+        <code>#10b981</code>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background-color: #f59e0b;"></div>
+      <div class="color-details">
+        <span class="color-name">Warning Yellow</span>
+        <code>#f59e0b</code>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background-color: #ef4444;"></div>
+      <div class="color-details">
+        <span class="color-name">Destructive Red</span>
+        <code>#ef4444</code>
+      </div>
+    </div>
+  </div>
+
+  <h3>Typography</h3>
+  <ul>
+    <li><strong>Font Family:</strong> <code>'Inter', -apple-system, sans-serif</code></li>
+    <li><strong>Headings (H1/H2):</strong> <code>1.25rem - 1.75rem</code>, Semi-bold / Bold</li>
+    <li><strong>Body Text:</strong> <code>1rem (16px)</code>, Regular</li>
+    <li><strong>Small Text/Labels:</strong> <code>0.75rem - 0.85rem</code>, Medium</li>
+  </ul>
+
+  <h3>Shadows & Elevation</h3>
+  <ul>
+    <li><strong>Card Default:</strong> <code>0 1px 3px rgba(0,0,0,0.05)</code></li>
+    <li><strong>Hover Elevation:</strong> <code>0 4px 6px rgba(0,0,0,0.05)</code></li>
+    <li><strong>Floating Element (Modals):</strong> <code>0 10px 15px -3px rgba(0,0,0,0.1)</code></li>
+  </ul>
+
+  <h3>Radii & Spacing</h3>
+  <ul>
+    <li><strong>Standard Cards:</strong> 12px or 16px</li>
+    <li><strong>Small Elements:</strong> 6px or 8px</li>
+    <li><strong>Input Fields/Pills:</strong> 24px (fully rounded)</li>
+    <li><strong>Spacing Scale:</strong> Micro (4-8px), Base (12-16px), Macro (24-48px)</li>
+  </ul>
+
+  <h2>🏗️ 2. Component Architecture</h2>
+  <p>This section maps the component hierarchy to the React component tree.</p>
+  
+  <div class="doc-image-container">
+    <img src="images/handoff/page3_img1.jpeg" alt="Component Architecture Diagram" style="max-width: 100%; border-radius: 8px; margin: 1rem 0; cursor: zoom-in; border: 1px solid #e2e8f0;">
+  </div>
+
+  <h3>Component Guidelines</h3>
+  <ul>
+    <li><strong>Sidebar (Global):</strong> 64px fixed width on Desktop. Sticks to left side.</li>
+    <li><strong>AssistantView:</strong> Centered flexbox for search bar, CSS Grid for agent cards.</li>
+    <li><strong>GovernanceChatLayout:</strong> Two-pane layout replacing main content area. Secondary sidebar width: 320px.</li>
+    <li><strong>GovernanceAgent (Chat Interface):</strong>
+      <ul>
+        <li><strong>User Message:</strong> Dark background (<code>#1e293b</code>), white text, right-aligned.</li>
+        <li><strong>Agent Message:</strong> White background, left-aligned, subtle border.</li>
+        <li><strong>Thinking Indicators:</strong> Collapsible accordion rows (<code>ThoughtBadge</code>).</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h2>🚀 3. Assets & Iconography</h2>
+  <p>Icon Library: <code>lucide-react</code> is used universally.</p>
+  <ul>
+    <li><code>Sparkles</code>: AI / Agent interventions</li>
+    <li><code>CheckCircle2</code>: Task completion</li>
+    <li><code>AlertCircle</code>: Warnings / Risk</li>
+  </ul>
+  
+  <div class="callout-tip">
+    <p><strong>TIP:</strong> Ensure you are using <code>lucide-react</code> for all vector assets to maintain stroke-width consistency (default 2px stroke, rounded caps and joins).</p>
+  </div>
+
+  <h2>💻 4. Development Notes</h2>
+  <ul>
+    <li><strong>State Management:</strong> Uses hoisted React state in <code>App.jsx</code> (projects, tasks, chatSessions).</li>
+    <li><strong>CSS Methodology:</strong> Semantic CSS in <code>index.css</code> for layout structure; inline styles for dynamic sub-components.</li>
+    <li><strong>Responsiveness:</strong> Breakpoints defined at 768px (Tablet) and 480px (Mobile).</li>
+  </ul>
+
+</div>
+
+
+
+
+<nav class="pagination"><a class="page-btn prev" href="challenges.html"><span class="btn-label">Previous Page</span><span class="btn-title">Key design challenges and reasonings</span></a><div></div></nav>
+<script src="script.js"></script><div class="lightbox-modal" id="lightbox-modal"><span class="lightbox-close">×</span><img class="lightbox-content" id="lightbox-img"/></div></body>
+</html>
